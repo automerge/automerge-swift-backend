@@ -1,0 +1,3 @@
+[target.aarch64-apple-ios-macabi.dependencies.std]
+[target.aarch64-apple-tvos.dependencies.std]
+[target.aarch64-apple-ios-sim.dependencies.std]
