@@ -41,8 +41,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "AutomergeBackend",
-            url: "https://github.com/lightsprint09/automerge-swift-backend/releases/download/0.1.1/AutomergeBackend-0.1.1.xcframework.zip",
-            checksum: "7a9029b63c40732abdf499667cd08f3e1e63eee6bb825004cedc0d1e6982300e"
+            url: "https://github.com/lightsprint09/automerge-swift-backend/releases/download/0.1.2/AutomergeBackend-0.1.2.xcframework.zip",
+            checksum: "04a3ed6c65ee8d56ee6fa41ffd97b9e8c477cd8a6622becfb95aa794afde1511"
         )
     ]
 )
