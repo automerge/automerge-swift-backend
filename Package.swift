@@ -28,7 +28,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Automerge",
+    name: "AutomergeBackend",
     platforms: [
         .iOS(.v12),
         .macOS(.v10_10),
