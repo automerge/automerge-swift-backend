@@ -31,7 +31,7 @@ echo "▸ Build x86_64-apple-darwin"
 cargo build --target x86_64-apple-darwin --package automerge-c --release
 
 echo "▸ x86_64-apple-ios-macabi"
-cargo build --target x86_64-apple-ios-macabi --package automerge-c --release
+xargo build --target x86_64-apple-ios-macabi --package automerge-c --release
 
 echo "▸ aarch64-apple-ios-macabi"
 xargo build --target aarch64-apple-ios-macabi --package automerge-c --release
@@ -61,7 +61,7 @@ lipo -create  \
     -output ./target/apple-ios-macabi/release/libautomerge.a
 
 echo "#####################"
-rm -rf ./xcframework/AutomergeRSBackend.xcframework
+rm -rf ./xcframework/AutomergeBackend.xcframework
 
 echo "▸ Create AutomergeRSBackend.xcframework"
   xcodebuild -create-xcframework \
@@ -73,4 +73,4 @@ echo "▸ Create AutomergeRSBackend.xcframework"
             -headers ./automerge-c/Headers \
             -library ./target/apple-darwin/release/libautomerge.a \
             -headers ./automerge-c/Headers \
-            -output ./xcframework/AutomergeRSBackend.xcframework
+            -output ./xcframework/AutomergeBackend.xcframework
