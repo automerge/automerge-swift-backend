@@ -1,10 +1,10 @@
-# AutoMerge swift backend
+# Automerge Swift Backend
 
 This directory contains the script and components needed to generate an XCFramework that allows the Apple platforms to link and use the [backend for Automerge, implemented in Rust](https://github.com/automerge/automerge-rs).
 
 ## Prerequisites
 
-Install Xcode and the rust programming language.
+Install Xcode and the Rust programming language.
 
 The Rust programming language doesn't have `std` library support pre-built and available for some of the platforms in the `stable` branch, so to build this library you'll need to use `nightly`.
 
