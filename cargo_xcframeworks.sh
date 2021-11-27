@@ -5,6 +5,16 @@
 echo "▸ Update toolchain"
 rustup update
 
+echo "x86_64-apple-ios-macabi and aarch64-apple-ios-macabi require the nightly toolchain"
+rustup toolchain install nightly
+#rustup default nightly
+
+# to allow for abi builds from the nightly toolchain for xargo...
+rustup component add rust-src
+
+echo "▸ Install xargo"
+cargo install xargo
+
 echo "▸ Install targets"
 rustup target add x86_64-apple-ios
 rustup target add aarch64-apple-ios
@@ -19,7 +29,7 @@ echo "▸ Build x86_64-apple-ios"
 cargo build --target x86_64-apple-ios --package automerge-c --release
 
 echo "▸ Build aarch64-apple-ios-sim"
-xargo build --target aarch64-apple-ios-sim --package automerge-c --release
+xargo build -Zbuild-std --target aarch64-apple-ios-sim --package automerge-c --release
 
 echo "▸ Build aarch64-apple-ios"
 cargo build --target aarch64-apple-ios --package automerge-c --release
@@ -31,13 +41,15 @@ echo "▸ Build x86_64-apple-darwin"
 cargo build --target x86_64-apple-darwin --package automerge-c --release
 
 echo "▸ x86_64-apple-ios-macabi"
-xargo build --target x86_64-apple-ios-macabi --package automerge-c --release
+xargo build -Zbuild-std --target x86_64-apple-ios-macabi --package automerge-c --release
 
 echo "▸ aarch64-apple-ios-macabi"
-xargo build --target aarch64-apple-ios-macabi --package automerge-c --release
+#xargo build --target aarch64-apple-ios-macabi --package automerge-c --release
+xargo build -Zbuild-std --target aarch64-apple-ios-macabi --package automerge-c --release
 
-#echo "▸ aarch64-apple-tvos"
-#xargo build --target aarch64-apple-tvos --package automerge-c --release
+# echo "▸ aarch64-apple-tvos"
+# xargo build -Zbuild-std --target aarch64-apple-tvos --package automerge-c --release
+# multiple errors when building the std. library for tvOS w/ nightly
 
 echo "▸ Lipo macOS"
 mkdir -p ./target/apple-darwin/release
@@ -63,14 +75,17 @@ lipo -create  \
 echo "#####################"
 rm -rf ./xcframework/AutomergeBackend.xcframework
 
+mkdir -p automerge-swift-backend/Headers
+cp automerge-c/automerge.h automerge-swift-backend/Headers
+
 echo "▸ Create AutomergeRSBackend.xcframework"
   xcodebuild -create-xcframework \
             -library ./target/apple-ios-simulator/release/libautomerge.a \
-            -headers ./automerge-c/Headers \
+            -headers ./automerge-swift-backend/Headers \
             -library ./target/aarch64-apple-ios/release/libautomerge.a \
-            -headers ./automerge-c/Headers \
+            -headers ./automerge-swift-backend/Headers \
             -library ./target/x86_64-apple-ios-macabi/release/libautomerge.a \
-            -headers ./automerge-c/Headers \
+            -headers ./automerge-swift-backend/Headers \
             -library ./target/apple-darwin/release/libautomerge.a \
-            -headers ./automerge-c/Headers \
+            -headers ./automerge-swift-backend/Headers \
             -output ./xcframework/AutomergeBackend.xcframework
