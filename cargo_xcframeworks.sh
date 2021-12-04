@@ -84,7 +84,7 @@ echo "▸ Create AutomergeRSBackend.xcframework"
             -headers ./automerge-swift-backend/Headers \
             -library ./target/aarch64-apple-ios/release/libautomerge.a \
             -headers ./automerge-swift-backend/Headers \
-            -library ./target/x86_64-apple-ios-macabi/release/libautomerge.a \
+            -library ./target/apple-ios-macabi/release/libautomerge.a \
             -headers ./automerge-swift-backend/Headers \
             -library ./target/apple-darwin/release/libautomerge.a \
             -headers ./automerge-swift-backend/Headers \
