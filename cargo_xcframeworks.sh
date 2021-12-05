@@ -90,3 +90,10 @@ echo "▸ Create AutomergeRSBackend.xcframework"
             -library ./target/apple-darwin/release/libautomerge.a \
             -headers ./automerge-swift-backend/Headers \
             -output ./xcframework/AutomergeBackend.xcframework
+
+echo "▸ Compress AutomergeRSBackend.xcframework"
+ditto -c -k --sequesterRsrc --keepParent ./xcframework/AutomergeBackend.xcframework ./automerge-swift-backend/AutomergeBackend.xcframework.zip
+
+echo "▸ Compute AutomergeRSBackend.xcframework checksum"
+cd automerge-swift-backend
+swift package compute-checksum ./AutomergeBackend.xcframework.zip
