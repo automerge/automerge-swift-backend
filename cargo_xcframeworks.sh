@@ -21,9 +21,9 @@ rustup target add aarch64-apple-ios
 rustup target add aarch64-apple-darwin
 rustup target add x86_64-apple-darwin
 rustup target add aarch64-apple-ios-sim
-rustup target add aarch64-apple-ios-macabi
-rustup target add x86_64-apple-ios-macabi
-rustup target add aarch64-apple-tvos
+# rustup target add aarch64-apple-ios-macabi
+# rustup target add x86_64-apple-ios-macabi
+# rustup target add aarch64-apple-tvos
 
 echo "▸ Build x86_64-apple-ios"
 cargo build --target x86_64-apple-ios --package automerge-c --release
@@ -40,12 +40,12 @@ cargo build --target aarch64-apple-darwin --package automerge-c --release
 echo "▸ Build x86_64-apple-darwin"
 cargo build --target x86_64-apple-darwin --package automerge-c --release
 
-# echo "▸ x86_64-apple-ios-macabi"
-# xargo build -Zbuild-std --target x86_64-apple-ios-macabi --package automerge-c --release
+echo "▸ x86_64-apple-ios-macabi"
+xargo build -Zbuild-std --target x86_64-apple-ios-macabi --package automerge-c --release
 
-# echo "▸ aarch64-apple-ios-macabi"
-# #xargo build --target aarch64-apple-ios-macabi --package automerge-c --release
-# xargo build -Zbuild-std --target aarch64-apple-ios-macabi --package automerge-c --release
+echo "▸ aarch64-apple-ios-macabi"
+#xargo build --target aarch64-apple-ios-macabi --package automerge-c --release
+xargo build -Zbuild-std --target aarch64-apple-ios-macabi --package automerge-c --release
 
 # echo "▸ aarch64-apple-tvos"
 # xargo build -Zbuild-std --target aarch64-apple-tvos --package automerge-c --release
@@ -88,9 +88,6 @@ echo "▸ Create AutomergeRSBackend.xcframework"
             -library ./target/apple-darwin/release/libautomerge_core.a \
             -headers ./automerge-swift-backend/Headers \
             -output ./xcframework/AutomergeBackend.xcframework
-
-  # -library ./target/apple-ios-macabi/release/libautomerge_core.a \
-  # -headers ./automerge-swift-backend/Headers \
 
 
 echo "▸ Compress AutomergeRSBackend.xcframework"
